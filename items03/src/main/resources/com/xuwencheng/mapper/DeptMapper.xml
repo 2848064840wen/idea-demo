@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuwencheng.mapper.DeptMapper">
+
+    <sql id="selectDept">
+        select id,name,create_time,update_time from dept
+    </sql>
+
+    <!--添加部门-->
+    <insert id="insertDept">
+        insert into dept (name, create_time, update_time) values (#{name},#{createTime},#{updateTime});
+    </insert>
+
+    <!--修改数据-->
+    <update id="updateDept">
+        update dept set name = #{name} ,update_time = now() where id = #{id}
+    </update>
+
+    <!--删除部门-->
+    <delete id="delete">
+        delete
+        from dept
+        where id = #{id}
+    </delete>
+
+    <!--查询部门的信息-->
+    <select id="listSelect" resultType="com.xuwencheng.pojo.Dept">
+        <include refid="selectDept"/>
+    </select>
+
+    <!--根据id查询部门-->
+    <select id="select" resultType="com.xuwencheng.pojo.Dept">
+        <include refid="selectDept"/>
+        where id = #{id}
+    </select>
+
+</mapper>
